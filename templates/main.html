@@ -3,8 +3,10 @@
 {% block title %}API Wars{% endblock %}
 
 {% block page_content %}
+<script src="{{ url_for('static', filename='javascript') }}" defer></script>
 <h1 class="page-header"> Star Wars universe planets </h1>
-
+<button class = "btn" id="Previous" disabled>Previous</button>
+<button class = "btn" id="Next">Next</button>
 <table class = table>
     <tr>
         <th>Name</th>
