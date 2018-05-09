@@ -3,11 +3,29 @@
 {% block title %}API Wars{% endblock %}
 
 {% block page_content %}
+{% set page = page|int %}
 <script src="{{ url_for('static', filename='javascript') }}" defer></script>
 <h1 class="page-header"> Star Wars universe planets </h1>
-<button class = "btn" id="Previous" disabled>Previous</button>
-<button class = "btn" id="Next">Next</button>
-<table class = table>
+{% if page == 1 %}
+<button class="btn" id="previous" disabled>Previous</button>
+{% else %}
+{% set page = page-1 %}
+<form action="{{ url_for('next_pages', page=page) }}">
+    <button class="btn" id="previous">Previous</button>
+    {% set page = page+1 %}
+</form>
+{% endif %}
+
+{% if page == 7 %}
+<button class="btn" id="next" disabled>Next</button>
+{% else %}
+{% set page = page+1 %}
+<form action="{{ url_for('next_pages', page=page) }}">
+    <button class="btn" id="next">Next</button>
+    {% set page = page-1 %}
+</form>
+{% endif %}
+<table class=table>
     <tr>
         <th>Name</th>
         <th>Diameter (KM)</th>
@@ -19,17 +37,17 @@
     </tr>
     {% for planet in planets['results'] %}
     <tr>
-        <td> {{ planet['name'] }} </td>
-        <td> {{ planet['diameter'] }} </td>
-        <td> {{ planet['climate'] }} </td>
-        <td> {{ planet['terrain'] }} </td>
+        <td> {{ planet['name'] }}</td>
+        <td> {{ planet['diameter'] }}</td>
+        <td> {{ planet['climate'] }}</td>
+        <td> {{ planet['terrain'] }}</td>
         <td> {{ planet['surface_water'] }}</td>
-        <td> {{ planet['population'] }} </td>
+        <td> {{ planet['population'] }}</td>
         <td>
             {% if (planet['population'] == '0' or planet['population'] == 'unknown') %}
-                No data.
+            No data.
             {% else %}
-                <button class = {{planet['name']}}> Population Details</button>
+            <button class={{planet['name']}}> Population Details</button>
             {% endif %}
         </td>
     </tr>
