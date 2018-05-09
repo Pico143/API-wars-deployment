@@ -6,24 +6,27 @@
 {% set page = page|int %}
 <script src="{{ url_for('static', filename='javascript') }}" defer></script>
 <h1 class="page-header"> Star Wars universe planets </h1>
-{% if page == 1 %}
-<button class="btn" id="previous" disabled>Previous</button>
-{% else %}
+{% if page != 1 %}
 {% set page = page-1 %}
-<form action="{{ url_for('next_pages', page=page) }}">
-    <button class="btn" id="previous">Previous</button>
+<form id="previous" action="{{ url_for('next_pages', page=page) }}">
     {% set page = page+1 %}
 </form>
 {% endif %}
-
-{% if page == 7 %}
-<button class="btn" id="next" disabled>Next</button>
-{% else %}
+{% if page != 7 %}
 {% set page = page+1 %}
-<form action="{{ url_for('next_pages', page=page) }}">
-    <button class="btn" id="next">Next</button>
+<form id="next" action="{{ url_for('next_pages', page=page) }}">
     {% set page = page-1 %}
 </form>
+{% endif %}
+{% if page == 1 %}
+<button class="btn" id="previous" form="previous" disabled>Previous</button>
+{% else %}
+<button class="btn" id="previous" form="previous">Previous</button>
+{% endif %}
+{% if page == 7 %}
+<button class="btn" id="next" form="next" disabled>Next</button>
+{% else %}
+<button class="btn" id="next" form="next">Next</button>
 {% endif %}
 <table class=table>
     <tr>
