@@ -15,6 +15,7 @@ def connection_handler(function):
 
     return wrapper
 
+
 def open_database():
     connection = None
     try:
@@ -34,8 +35,9 @@ def get_planets(page):
     else:
         return requests.get("https://swapi.co/api/planets/?page={0}".format(page)).json()
 
+
 @connection_handler
-def add_user_to_db(cursor,registration_data):
+def add_user_to_db(cursor, registration_data):
     ''' Adds user to database
     Args:
     Registration_data - array with two strings (username and password)
@@ -43,8 +45,11 @@ def add_user_to_db(cursor,registration_data):
     query = """INSERT INTO users (username, password) VALUES (%s, %s);"""
     cursor.execute(query, registration_data)
 
+
 @connection_handler
-def get_user_password_from_db(username):
-    query = """SELECT password FROM users WHERE username = %s"""
+def get_user_password_from_db(cursor,username):
+    username = [username]
+    query = """SELECT password FROM users WHERE username = %s;"""
     cursor.execute(query, username)
-    return cursor.fetchall()
+    password = cursor.fetchall()[0]['password']
+    return password

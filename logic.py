@@ -10,3 +10,9 @@ def register_user(username, password):
     password = werkzeug.security.generate_password_hash(password)
     registration_data = [username, password]
     persistence.add_user_to_db(registration_data)
+
+def login(username,password):
+    hashed_password = persistence.get_user_password_from_db(username)
+    return werkzeug.check_password_hash(hashed_password, password)
+
+
