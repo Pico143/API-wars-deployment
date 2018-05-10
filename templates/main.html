@@ -19,24 +19,20 @@
 
 </div>
 <h1 class="page-header"> Star Wars universe planets </h1>
-{% if page != 1 %}
 {% set page = page-1 %}
 <form id="previous" action="{{ url_for('next_pages', page=page) }}">
     {% set page = page+1 %}
 </form>
-{% endif %}
-{% if page != 7 %}
 {% set page = page+1 %}
 <form id="next" action="{{ url_for('next_pages', page=page) }}">
     {% set page = page-1 %}
 </form>
-{% endif %}
 {% if page == 1 %}
 <button class="btn" id="previous" form="previous" disabled>Previous</button>
 {% else %}
 <button class="btn" id="previous" form="previous">Previous</button>
 {% endif %}
-{% if page == 7 %}
+{% if planets['next'] == none %}
 <button class="btn" id="next" form="next" disabled>Next</button>
 {% else %}
 <button class="btn" id="next" form="next">Next</button>
