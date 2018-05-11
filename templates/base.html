@@ -7,7 +7,7 @@
         {% if session['logged_in'] %}
         <a class="navbar-brand" href="{{ url_for('logout') }}">Log out</a>
         <div class="nav navbar-nav navbar-right">
-        <p class="navbar-text"><strong>Logged in as {{session['username']}}</strong></p>
+            <p class="navbar-text"><strong>Logged in as {{session['username']}}</strong></p>
         </div>
         {% else %}
         <a class="navbar-brand" href="{{ url_for('register') }}">Registration</a>

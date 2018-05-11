@@ -52,7 +52,7 @@ def add_user_to_db(cursor, registration_data):
 
 
 @connection_handler
-def get_user_password_from_db(cursor,username):
+def get_user_password_from_db(cursor, username):
     '''
 
     :param cursor: RealDictCursor from connection handler
