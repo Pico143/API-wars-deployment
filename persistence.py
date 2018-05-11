@@ -30,6 +30,11 @@ def open_database():
 
 
 def get_planets(page):
+    '''
+
+    :param page: integer with page number
+    :return:
+    '''
     if page == 1:
         return requests.get("https://swapi.co/api/planets").json()
     else:
@@ -48,8 +53,17 @@ def add_user_to_db(cursor, registration_data):
 
 @connection_handler
 def get_user_password_from_db(cursor,username):
+    '''
+
+    :param cursor: RealDictCursor from connection handler
+    :param username: string
+    :return: hashed password
+    '''
     username = [username]
     query = """SELECT password FROM users WHERE username = %s;"""
     cursor.execute(query, username)
-    password = cursor.fetchall()[0]['password']
+    try:
+        password = cursor.fetchall()[0]['password']
+    except IndexError():
+        raise ValueError("No such user in database")
     return password

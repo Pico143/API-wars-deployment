@@ -6,7 +6,9 @@
         <a class="navbar-brand" href="{{ url_for('main_page') }}">Planet List</a>
         {% if session['logged_in'] %}
         <a class="navbar-brand" href="{{ url_for('logout') }}">Log out</a>
-        <p class="navbar-text"> Logged in as {{session['username']}}</p>
+        <div class="nav navbar-nav navbar-right">
+        <p class="navbar-text"><strong>Logged in as {{session['username']}}</strong></p>
+        </div>
         {% else %}
         <a class="navbar-brand" href="{{ url_for('register') }}">Registration</a>
         <a class="navbar-brand" href="{{ url_for('login') }}">Log in</a>

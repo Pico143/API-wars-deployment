@@ -27,7 +27,7 @@
 <form id="next" action="{{ url_for('next_pages', page=page) }}">
     {% set page = page-1 %}
 </form>
-{% if page == 1 %}
+{% if planets['previous'] == none %}
 <button class="btn" id="previous" form="previous" disabled>Previous</button>
 {% else %}
 <button class="btn" id="previous" form="previous">Previous</button>

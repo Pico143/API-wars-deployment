@@ -50,7 +50,7 @@ def login():
             session['username'] = login
             flash('Logged in succesfully')
             return redirect(url_for('main_page'))
-        flash("Wrong password")
+        flash("Wrong login credentials provided.")
         return render_template('login.html')
 
 
