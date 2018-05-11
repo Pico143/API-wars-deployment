@@ -58,12 +58,14 @@ def get_user_password_from_db(cursor,username):
     :param cursor: RealDictCursor from connection handler
     :param username: string
     :return: hashed password
+
+    If user does not exist, raises ValueError
     '''
     username = [username]
     query = """SELECT password FROM users WHERE username = %s;"""
     cursor.execute(query, username)
     try:
         password = cursor.fetchall()[0]['password']
-    except IndexError():
+    except IndexError:
         raise ValueError("No such user in database")
     return password
