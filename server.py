@@ -47,6 +47,7 @@ def login():
         validation = logic.login(login, password)
         if validation:
             session['logged_in'] = True
+            session['username'] = login
             flash('Logged in succesfully')
             return redirect(url_for('main_page'))
         flash("Wrong password")
@@ -56,6 +57,7 @@ def login():
 @app.route("/logout")
 def logout():
     logic.verify_session(session)
+    session.clear()
     session['logged_in'] = False
     return redirect('/')
 
