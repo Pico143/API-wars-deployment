@@ -23,7 +23,7 @@ def next_pages(page=1):
 @app.route('/registration', methods=['GET', 'POST'])
 def register():
     logic.verify_session(session)
-    if session['logged_in'] == True:
+    if session['logged_in'  ] == True:
         return redirect(url_for('main_page'))
     if request.method == "GET":
         return render_template('registration_form.html')
