@@ -64,6 +64,7 @@ def logout():
 
 if __name__ == '__main__':
     app.secret_key = 'fvoasdhomeisiuoahvdfljkslvgufgdskjgldfh'
+    app.config['SESSION_TYPE'] = 'filesystem'
     app.run(
         host='0.0.0.0',
         port=8000,
