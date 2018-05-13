@@ -17,11 +17,15 @@ def connection_handler(function):
 
 
 def open_database():
+    urllib.parse.uses_netloc.append('postgres')
+    url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
     connection = None
     try:
-        params = config()
-        print('Connecting to the PostgreSQL database...')
-        connection = psycopg2.connect(**params)
+        connection = psycopg2.connect(database=url.path[1:],
+                                      user=url.username,
+                                      password=url.password,
+                                      host=url.hostname,
+                                      port=url.port)
         connection.autocommit = True
 
     except (Exception, psycopg2.DatabaseError) as error:
