@@ -31,7 +31,11 @@ def register():
     if request.method == "POST":
         login = request.form['username']
         password = request.form['pwd']
-        logic.register_user(login, password)
+        try:
+            logic.register_user(login, password)
+        except ValueError as err:
+            flash(err)
+            return render_template('registration_form.html')
         return redirect('/')
 
 

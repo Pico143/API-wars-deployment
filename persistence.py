@@ -50,8 +50,13 @@ def get_planets(page):
 def add_user_to_db(cursor, registration_data):
     ''' Adds user to database
     Args:
-    Registration_data - array with two strings (username and password)
+    Registration_data - array with two strings (username on index 0 and password on index 1)
     '''
+    query = """SELECT * FROM users WHERE username=%s;"""
+    username = [registration_data[0]]
+    cursor.execute(query, username)
+    if cursor.fetchall() != []:
+        raise ValueError("Username taken.")
     query = """INSERT INTO users (username, password) VALUES (%s, %s);"""
     cursor.execute(query, registration_data)
 
