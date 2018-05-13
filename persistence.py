@@ -2,7 +2,7 @@ import requests
 import psycopg2
 import psycopg2.extras
 import urllib
-import os   
+import os
 
 
 def connection_handler(function):
