@@ -20,7 +20,10 @@ def register_user(username, password):
     '''
     password = security.generate_password_hash(password)
     registration_data = [username, password]
-    persistence.add_user_to_db(registration_data)
+    try:
+        persistence.add_user_to_db(registration_data)
+    except ValueError as err:
+        raise ValueError(err)
 
 
 def login(username, password):
