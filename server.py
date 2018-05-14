@@ -34,7 +34,7 @@ def register():
         try:
             logic.register_user(login, password)
         except ValueError as err:
-            flash(err)
+            flash("Username taken.")
             return render_template('registration_form.html')
         return redirect('/')
 
